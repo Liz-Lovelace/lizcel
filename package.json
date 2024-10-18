@@ -1,0 +1,14 @@
+{
+  "type": "module",
+  "scripts": {
+    "backend-dev": "bun --watch server/main.js",
+    "backend-start": "node server/main.js",
+    "frontend-dev": "bun --watch cli/lizcel.js",
+    "frontend-start": "node cli/lizcel.js"
+  },
+  "dependencies": {
+    "adm-zip": "^0.5.16",
+    "archiver": "^7.0.1",
+    "express": "^4.21.1"
+  }
+}

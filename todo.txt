@@ -1,0 +1,36 @@
+GOALS:
+- [x] algo to zip up and transfer some shit from dirs cli/a/name to server/b/name, then unzip
+- [ ] make it do directories and write to named dir
+- [ ] basic auth key (+fix timing attacks)
+- [ ] try local -> remote
+
+LATER:
+- [ ] make sure that no files outside correct subdirs are served, other security stuff
+
+FLOW:
+- make a directory with lizcel.json
+- in lizcel config, specify:
+  - mode: staticDir
+  - what subdir to scp and serve (check for sensitive files like lizcel.json and .env!!!)
+  - subdomain/name of project
+- put [index.html, style.css, assets/image.png] into dist
+- run lizcel command
+  - it zips up (or .tar.gz) dist into /tmp/lizcel.zip
+  - connects to lizcel.liz-lovelace.com with:
+    - some kind of auth key
+    - zip of servable files
+    - lizcel config
+  - server verifies everything and responds with "ok, gonna do stuff now"
+- the server:
+  - overwrites a dir for the subdomain/name with the contents of zip (check for path attacks!!)
+  - create/edit/noop the subdomain record to point to self
+  - serve subdomain dir when requests come from :443/:80 from subdomain
+
+DX:
+- After creating a dir with a static website and writing a simple lizcel.json, you can run a command that automagically deploys it, no questions asked. After the DNS record propagates, you can go to the website and view it. Then you can quickly update the website and have the changes be reflected live immediately
+
+TIDBITS:
+
+
+DEVLOG:
+- started at 17:00 18.10.2024

@@ -1,0 +1,4 @@
+{
+  "domain": ["abc1", "abcd", "gallery"],
+  "serve": "test-website/"
+}

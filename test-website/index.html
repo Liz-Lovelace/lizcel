@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЮНИКУХПРОМ | Оборудование для полевой кухни</title>
+    <style>
+        /* Base styles */
+        body, html {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .svg-container {
+            width: 100%;
+            text-align: center;
+            position: relative;
+        }
+
+        .responsive-svg {
+            width: 100%;
+            height: auto;
+            display: none; /* Initially hide all SVGs */
+            margin: 0 auto;
+        }
+
+        .desktop-svg {
+            display: none; /* Hide desktop SVG by default */
+        }
+
+        .mobile-svg {
+            display: none; /* Hide mobile SVG by default */
+        }
+
+        /* Invisible clickable links */
+        .invisible-link {
+            display: none;
+            position: absolute;
+            z-index: 1;
+            background: rgba(0, 0, 0, 0); /* for debugging purposes */
+            border-radius: 10px;
+        }
+
+        .link1pc {
+            top: 0.4%;
+            left: 82%;
+            width: 14%;
+            height: 2%;
+        }
+
+        .link2pc {
+            top: 74.4%;
+    left: 4%;
+    width: 18%;
+    height: 3%;
+        }
+
+        .link3pc {
+            top: 90.4%;
+    left: 4%;
+    width: 10%;
+    height: 0.9%;
+        }
+
+        .link4pc {
+            top: 91.4%;
+    left: 4%;
+    width: 11%;
+    height: 1%;
+        }
+        
+        .link5pc {
+            top: 96%;
+    left: 83%;
+    width: 14%;
+    height: 1.5%;
+        }
+        
+
+
+
+
+        .link1m {
+            top: 0.4%;
+    left: 58%;
+    width: 38%;
+    height: 1.7%;
+        }
+
+
+        .link2m {
+            top: 80.2%;
+    left: 4%;
+    width: 68%;
+    height: 2.2%;
+        }
+        
+        .link3m {
+            top: 92.4%;
+    left: 4%;
+    width: 31%;
+    height: 1.1%;
+        }
+        
+        .link4m {
+            top: 93.5%;
+    left: 4%;
+    width: 39%;
+    height: 1%;
+        }
+        
+        .link5m {
+            top: 98.4%;
+    left: 56%;
+    width: 27%;
+    height: 1.2%;
+        }
+
+
+
+        /* Media query for devices with a width of at least 768px (typically tablets and desktops) */
+        @media (min-width: 768px) {
+            .desktop-svg {
+                display: block; /* Show desktop SVG on larger screens */
+            }
+            .desktop-link {
+                display: block; /* Show desktop links on larger screens */
+            }
+        }
+
+        /* Media query for devices with a width less than 768px (typically mobile devices) */
+        @media (max-width: 768px) {
+            .mobile-svg {
+                display: block; /* Show mobile SVG on smaller screens */
+            }
+            .mobile-link {
+                display: block; /* Show mobile links on smaller screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="svg-container">
+        <img src="PC.svg" alt="Desktop SVG" class="responsive-svg desktop-svg">
+        <img src="Mobile.svg" alt="Mobile SVG" class="responsive-svg mobile-svg">
+
+        <a href="https://wa.me/+79658699662" class="invisible-link link1pc desktop-link" target="_blank"></a>
+        <a href="https://wa.me/+79658699662" class="invisible-link link2pc desktop-link" target="_blank"></a>
+        <a href="https://wa.me/+79658699662" class="invisible-link link3pc desktop-link" target="_blank"></a>
+        <a href="mailto:unikuhprom@mail.ru" class="invisible-link link4pc desktop-link" target="_blank"></a>
+        <a href="https://t.me/tim_sign" class="invisible-link link5pc desktop-link" target="_blank"></a>
+
+        <a href="https://wa.me/+79658699662" class="invisible-link link1m mobile-link" target="_blank"></a>
+        <a href="https://wa.me/+79658699662" class="invisible-link link2m mobile-link" target="_blank"></a>
+        <a href="https://wa.me/+79658699662" class="invisible-link link3m mobile-link" target="_blank"></a>
+        <a href="mailto:unikuhprom@mail.ru" class="invisible-link link4m mobile-link" target="_blank"></a>
+        <a href="https://t.me/tim_sign" class="invisible-link link5m mobile-link" target="_blank"></a>
+    </div>
+</body>
+</html>

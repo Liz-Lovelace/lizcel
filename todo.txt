@@ -1,11 +1,15 @@
 GOALS:
 - [x] algo to zip up and transfer some shit from dirs cli/a/name to server/b/name, then unzip
-- [ ] make it do directories and write to named dir
-- [ ] basic auth key (+fix timing attacks)
-- [ ] try local -> remote
+- [x] make it do directories and write to named dir
+- [x] try local -> remote
+- [x] basic auth key in ~/.config/lizcel-auth (+fix timing attacks)
+- [x] play around with the cloudflare api, make a module that handles it
+- [x] research how i'm gonna do ssl
+- [x] clean up all backend logic
+- [ ] verify (ask llm) all config security things, file integrity, etc etc
 
 LATER:
-- [ ] make sure that no files outside correct subdirs are served, other security stuff
+- [x] make sure that no files outside correct subdirs are served, other security stuff
 
 FLOW:
 - make a directory with lizcel.json

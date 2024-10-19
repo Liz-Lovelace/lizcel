@@ -6,35 +6,17 @@ GOALS:
 - [x] play around with the cloudflare api, make a module that handles it
 - [x] research how i'm gonna do ssl
 - [x] clean up all backend logic
-- [ ] verify (ask llm) all config security things, file integrity, etc etc
-
-LATER:
-- [x] make sure that no files outside correct subdirs are served, other security stuff
-
-FLOW:
-- make a directory with lizcel.json
-- in lizcel config, specify:
-  - mode: staticDir
-  - what subdir to scp and serve (check for sensitive files like lizcel.json and .env!!!)
-  - subdomain/name of project
-- put [index.html, style.css, assets/image.png] into dist
-- run lizcel command
-  - it zips up (or .tar.gz) dist into /tmp/lizcel.zip
-  - connects to lizcel.liz-lovelace.com with:
-    - some kind of auth key
-    - zip of servable files
-    - lizcel config
-  - server verifies everything and responds with "ok, gonna do stuff now"
-- the server:
-  - overwrites a dir for the subdomain/name with the contents of zip (check for path attacks!!)
-  - create/edit/noop the subdomain record to point to self
-  - serve subdomain dir when requests come from :443/:80 from subdomain
-
-DX:
-- After creating a dir with a static website and writing a simple lizcel.json, you can run a command that automagically deploys it, no questions asked. After the DNS record propagates, you can go to the website and view it. Then you can quickly update the website and have the changes be reflected live immediately
-
-TIDBITS:
-
+- [x] move all domains to new dns
+- [x] verify (ask llm) all config security things, file integrity, etc etc
+- [x] add report
+- [x] add cli to path
+- [ ] quick readme and then SHIP
 
 DEVLOG:
 - started at 17:00 18.10.2024
+- almost finished at 3:00 19.10.2024
+  - deploys static websites with auto DNS and SSL (via caddy), 
+  - need to move other domains to cloudflare
+  - need to check security
+  - need to add error reporting
+  - need to and add cli to path and deploy

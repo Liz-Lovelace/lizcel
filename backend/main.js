@@ -8,6 +8,7 @@ import crypto from 'crypto';
 import dotenv from 'dotenv';
 import { tryToTakeDomain } from './dns.js';
 import { addDomainToCaddy } from './caddy.js';
+import { report } from '../utils/report.js';
 
 dotenv.config();
 
@@ -15,6 +16,16 @@ const app = express();
 const port = 10203;
 
 const gunzipPromise = promisify(gunzip);
+
+process.on('uncaughtException', async (error) => {
+  report({error, message: 'Uncaught Exception in node.js'})
+  await new Promise(resolve => setTimeout(resolve, 1000))
+  process.exit(1)
+});
+
+process.on('unhandledRejection', (error) => {
+  report({error, message: 'Unhandled Promise Rejection in node.js'})
+});
 
 app.use(express.raw({ type: 'application/octet-stream', limit: '150mb' }));
 
@@ -33,30 +44,30 @@ const authenticate = (req, res, next) => {
 };
 
 app.post('/push', authenticate, async (req, res) => {
-  try {
-    const config = JSON.parse(req.get('config') || '{}');
-    const domain = config.domain;
-    if (!domain || ![2,3].includes(domain.length)) {
-      throw new Error('Invalid domain');
-    }
-
-    if (!domain.every((part) => /^[a-zA-Z0-9-]+$/.test(part))) {
-      throw new Error('Invalid domain: each part must only contain A-Z, a-z, 0-9, and hyphens');
-    }
-
-    await writeWebsiteDir(req.body, domain.join('_'));
-
-    let dnsMessage = await tryToTakeDomain(domain);
-    res.status(200).send(`DNS says: ${dnsMessage}\nOK. In 10 minutes, I'll configure caddy.\nURL: https://${domain.join('.')}`).end();
-
-    setTimeout(async () => {
-      await addDomainToCaddy(domain);
-    }, 10 * 60 * 1000);
-
-  } catch (error) {
-    console.error('Error processing the files:', error);
-    res.status(500).send(`Error processing the files: ${error.message}`);
+  const config = JSON.parse(req.get('config') || '{}');
+  const domain = config.domain;
+  if (!domain || ![2,3].includes(domain.length)) {
+    throw new Error('Invalid domain');
   }
+
+  if (!domain.every((part) => /^[a-zA-Z0-9-]+$/.test(part))) {
+    throw new Error('Invalid domain: each part must only contain A-Z, a-z, 0-9, and hyphens');
+  }
+
+  await writeWebsiteDir(req.body, domain.join('_'));
+
+  let dnsMessage = await tryToTakeDomain(domain);
+  res.status(200).send(`DNS says: ${dnsMessage}\nOK. In 5 minutes, I'll configure caddy.\nURL: https://${domain.join('.')}`).end();
+
+  console.log('Waiting 5 minutes before configuring caddy...')
+  setTimeout(async () => {
+    await addDomainToCaddy(domain);
+  }, 5 * 60 * 1000);
+});
+
+app.use((error, req, res, next) => {
+  report({error, message: 'Express Error'})
+  res.status(500).send(`Something broke: ${error.message}`)
 });
 
 app.listen(port, () => {

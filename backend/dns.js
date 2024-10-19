@@ -1,4 +1,5 @@
 import dotenv from 'dotenv';
+import { report } from '../utils/report.js';
 
 dotenv.config();
 
@@ -53,6 +54,7 @@ async function getDNSRecords(zoneId) {
 }
 
 async function takeDomain(zoneId, fullDomain) {
+  report({message: `Adding type A record for ${fullDomain} that points to ${process.env.LIZCEL_IP}`});
   console.log(`Adding type A record for ${fullDomain} that points to ${process.env.LIZCEL_IP}`);
   
   const response = await fetch(

@@ -1,16 +1,15 @@
 import fs from 'fs/promises';
 import { exec } from 'child_process';
 import { promisify } from 'util';
+import { report } from '../utils/report.js';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
 const execAsync = promisify(exec);
 
-// serveDomain(['abc1', 'abcd', 'gallery']).then(console.log)
-
 export async function addDomainToCaddy(domain) {
-  console.log(`adding domain ${domain} to caddy...`);
+  console.log(`Adding domain ${domain.join('.')} to caddy...`);
   const caddyfilePath = process.env.CADDYFILE_PATH;
 
   let caddyfileContent = await fs.readFile(caddyfilePath, 'utf-8');
@@ -29,6 +28,7 @@ export async function addDomainToCaddy(domain) {
 `;
 
   await fs.appendFile(caddyfilePath, newEntry);
+  report({message: `Added Caddy entry for ${fullDomain}`});
 
   await execAsync(`caddy reload --config ${caddyfilePath}`);
   console.log('Caddy reloaded successfully');

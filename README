@@ -1,0 +1,3 @@
+Lizcel is Liz's janky clone of vercel. It can upload a static website to a VPS server, automatically add a subdomain for it, and serve it (HTTPS included!)
+
+It's not the most secure thing in the world, but it works.
